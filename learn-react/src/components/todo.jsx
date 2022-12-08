@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
 const ToDoInput = () => {
-	const [inputs, setInputs] = useState("");
+	const [inputs, setInputs] = useState('');
 
 	const onChaneInput = (e) => {
-		setInputs(e.targer.value);
+		setInputs(e.target.value);
 	}
 
 	return (
