@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+import './todo.scss';
 
 const ToDoInput = () => {
 	const [inputs, setInputs] = useState('');
@@ -16,19 +18,19 @@ const ToDoInput = () => {
 
 	return (
 		<>
-		<form>
-			<input
-				type="text"
-				name="newTask"
-				placeholder="add todo"
-				value={inputs}
-				className="input"
-				id="inputTodo"
-				onChange={(e) => onChaneInput(e)}
-			></input>
-			<label htmlFor="inputTodo">Add todo</label>
-			<button onClick={showListToDo}>Send</button>
-		</form>
+			<div className="block-form">
+				<label>
+					<input
+						type="text"
+						name="newTask"
+						placeholder="add todo"
+						value={inputs}
+						className="block-form__input"
+						onChange={(e) => onChaneInput(e)}
+					></input>
+				</label>
+				<button className="block-form__button" onClick={showListToDo}>Send</button>
+			</div>
 		<div>
 			<ul>
 				{arrListToDo.map(item => 
