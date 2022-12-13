@@ -32,11 +32,11 @@ const ToDoInput = () => {
 				<button className="block-form__button" onClick={showListToDo}>Send</button>
 			</div>
 		<div>
-			<ul>
+			<form className="block-list">
 				{arrListToDo.map(item => 
-					<li>{item}</li>
+					<label><input type="checkbox" value={item}></input>{item}</label>
 				)}
-			</ul>
+			</form>
 		</div>
 		</>
 	)
