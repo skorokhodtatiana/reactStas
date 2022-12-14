@@ -1,3 +1,6 @@
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 import './todo.scss';
@@ -12,7 +15,8 @@ const ToDoInput = () => {
 
 	const showListToDo = () => {
 		const val = inputs;
-		arrListToDo.push(val);
+		setArrListToDo([...arrListToDo, inputs]);
+		// arrListToDo.push(val);
 		setInputs('');
 	}
 
@@ -33,8 +37,13 @@ const ToDoInput = () => {
 			</div>
 		<div>
 			<form className="block-list">
-				{arrListToDo.map(item => 
+				{arrListToDo.map(item =>
+				<div className="block-list__toDo">
 					<label><input type="checkbox" value={item}></input>{item}</label>
+					<button className="block-list__icon-delete">
+						<FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+					</button>
+				</div>
 				)}
 			</form>
 		</div>
