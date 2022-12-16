@@ -21,7 +21,8 @@ const ToDoInput = () => {
 	}
 
 	const handleClickButton = (e) => {
-		setArrListToDo(arrListToDo.filter(item => item.id !== e.id))
+		console.log(e);
+		setArrListToDo(arrListToDo.filter(item => item.id !== e.id));
 	}
 
 	return (
@@ -43,8 +44,8 @@ const ToDoInput = () => {
 			<form className="block-list">
 				{arrListToDo.map(item =>
 				<div className="block-list__toDo">
-					<label><input key={item} type="checkbox" value={item}></input>{item}</label>
-					<button onClick={(e)=>handleClickButton(e)} className="block-list__icon-delete">
+					<label><input id={arrListToDo.indexOf(item)} type="checkbox" value={item}></input>{item}</label>
+					<button id={arrListToDo.indexOf(item)} onClick={(e)=>handleClickButton(e)} className="block-list__icon-delete">
 						<FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
 					</button>
 				</div>
