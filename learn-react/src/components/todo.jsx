@@ -8,6 +8,9 @@ import './todo.scss';
 const ToDoInput = () => {
 	const [inputs, setInputs] = useState('');
 	const [arrListToDo, setArrListToDo] = useState([]);
+	const [index, setIndex] = useState(0);
+
+	console.log(index);
 
 	const onChaneInput = (e) => {
 		setInputs(e.target.value);
@@ -18,11 +21,13 @@ const ToDoInput = () => {
 		setArrListToDo([...arrListToDo, inputs]);
 		// arrListToDo.push(val);
 		setInputs('');
+		setIndex(index + 1);
 	}
 
-	const handleClickButton = (e) => {
-		console.log(e);
-		setArrListToDo(arrListToDo.filter(item => item.id !== e.id));
+	const handleClickButton = (id) => {
+		console.log();
+		setArrListToDo(arrListToDo.filter(item => item.id !== id));
+		// setArrListToDo([...newArr, inputs]);
 	}
 
 	return (
@@ -30,6 +35,7 @@ const ToDoInput = () => {
 			<div className="block-form">
 				<label>
 					<input
+						id={index}
 						type="text"
 						name="newTask"
 						placeholder="add todo"
@@ -39,13 +45,14 @@ const ToDoInput = () => {
 					></input>
 				</label>
 				<button className="block-form__button" onClick={showListToDo}>Send</button>
+				
 			</div>
 		<div>
 			<form className="block-list">
 				{arrListToDo.map(item =>
 				<div className="block-list__toDo">
-					<label><input id={arrListToDo.indexOf(item)} type="checkbox" value={item}></input>{item}</label>
-					<button id={arrListToDo.indexOf(item)} onClick={(e)=>handleClickButton(e)} className="block-list__icon-delete">
+					<label><input id={item.index} type="checkbox" value={item}></input>{item}</label>
+					<button value={item.index} onClick={(val)=>handleClickButton(val)} className="block-list__icon-delete">
 						<FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
 					</button>
 				</div>
