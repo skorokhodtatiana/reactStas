@@ -10,24 +10,23 @@ const ToDoInput = () => {
 	const [arrListToDo, setArrListToDo] = useState([]);
 	const [index, setIndex] = useState(0);
 
-	console.log(index);
-
 	const onChaneInput = (e) => {
 		setInputs(e.target.value);
-	}
-
-	const showListToDo = () => {
-		const val = inputs;
-		setArrListToDo([...arrListToDo, inputs]);
-		// arrListToDo.push(val);
-		setInputs('');
 		setIndex(index + 1);
 	}
 
+	const showListToDo = () => {
+		setArrListToDo([...arrListToDo, inputs]);
+		setInputs('');
+		
+	}
+
 	const handleClickButton = (id) => {
-		console.log();
-		setArrListToDo(arrListToDo.filter(item => item.id !== id));
-		// setArrListToDo([...newArr, inputs]);
+		
+		console.log(arrListToDo.filter(item => item.id !== id));
+		let newArr = arrListToDo.filter(item => console.log(item.id));
+		setArrListToDo([...newArr, inputs]);
+		console.log(setArrListToDo([...newArr, inputs]));
 	}
 
 	return (
@@ -51,8 +50,8 @@ const ToDoInput = () => {
 			<form className="block-list">
 				{arrListToDo.map(item =>
 				<div className="block-list__toDo">
-					<label><input id={item.index} type="checkbox" value={item}></input>{item}</label>
-					<button value={item.index} onClick={(val)=>handleClickButton(val)} className="block-list__icon-delete">
+					<label><input id={item.id} type="checkbox" value={item}></input>{item}</label>
+					<button id={item.id} onClick={(id)=>handleClickButton(id)} className="block-list__icon-delete">
 						<FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
 					</button>
 				</div>
