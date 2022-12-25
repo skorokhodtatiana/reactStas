@@ -6,27 +6,22 @@ import { useState } from "react";
 import './todo.scss';
 
 const ToDoInput = () => {
-	const [inputs, setInputs] = useState('');
+	const [inputs, setInputs] = useState({value: '', id: ''});
 	const [arrListToDo, setArrListToDo] = useState([]);
 	const [index, setIndex] = useState(0);
 
 	const onChaneInput = (e) => {
-		setInputs(e.target.value);
+		setInputs({value: e.target.value, id: arrListToDo.length});
 		setIndex(index + 1);
 	}
 
 	const showListToDo = () => {
 		setArrListToDo([...arrListToDo, inputs]);
-		setInputs('');
-		
+		setInputs({value: '', id: ''});
 	}
 
 	const handleClickButton = (id) => {
-		//console.log(arrListToDo[1].index);
-		console.log(arrListToDo.filter(item => item.id !== id));
-		let newArr = arrListToDo.filter(item => console.log(item.id));
-		setArrListToDo([...newArr, inputs]);
-		console.log(setArrListToDo([...newArr, inputs]));
+		setArrListToDo(arrListToDo.filter(item => item.id !== id));
 	}
 
 	return (
@@ -34,29 +29,27 @@ const ToDoInput = () => {
 			<div className="block-form">
 				<label>
 					<input
-						id={index}
+						id={inputs.id}
 						type="text"
 						name="newTask"
 						placeholder="add todo"
-						value={inputs}
+						value={inputs.value}
 						className="block-form__input"
 						onChange={(e) => onChaneInput(e)}
 					></input>
 				</label>
 				<button className="block-form__button" onClick={showListToDo}>Send</button>
-				
 			</div>
 		<div>
-			<form className="block-list">
+			<ul className="block-list">
 				{arrListToDo.map(item =>
-				<div className="block-list__toDo">
-					<label><input id={item.id} type="checkbox" value={item}></input>{item}</label>
-					<button value={id} onClick={(id)=>handleClickButton(id)} className="block-list__icon-delete">
-						<FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
-					</button>
-				</div>
+					<li className="block-list__toDo" id={item.id}>{item.value}
+						<button onClick={()=>handleClickButton(item.id)} className="block-list__icon-delete">
+							<FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+						</button>
+					</li>
 				)}
-			</form>
+			</ul>
 		</div>
 		</>
 	)
