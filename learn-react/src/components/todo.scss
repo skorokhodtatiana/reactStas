@@ -17,16 +17,16 @@
 	display: flex;
 	flex-direction: column;
 
-	&__toDo {
-		display: flex;
-		width: 20%;
-	}
+	// &__toDo {
+	// 	display: flex;
+	// 	width: 20%;
+	// }
 
 	&__icon-trash {
 		justify-self: end;
 	}
 
-	&__icon-delete {
-		margin-left: 4%;
-	}
+	// &__icon-delete {
+	// 	margin-left: 4%;
+	// }
 }
