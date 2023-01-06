@@ -15,8 +15,6 @@ const MainPage = () => {
 			},
 			body: JSON.stringify({ body: inputValue }),
 		});
-
-		
 		console.log(response);
 	};
 
