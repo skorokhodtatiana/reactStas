@@ -4,15 +4,15 @@ const API_URL = 'https://hacker-news.firebaseio.com/v0/';
 
 const MainPage = () => {
 
-	//const [inputValue, setinputValue] = useState('');
-	const [inputValue, setinputValue] = useState({
-		by: "",
-		descendants: "",
-		kids: "",
-		score: "",
-	});
+	const [inputValue, setinputValue] = useState('');
+	// const [inputValue, setinputValue] = useState({
+	// 	by: "",
+	// 	descendants: "",
+	// 	kids: "",
+	// 	score: "",
+	// });
 
-	//let selectNews;
+	let selectNews = [];
 		// fetch(`${API_URL}topstories.json`)
 		// 	.then(res => res.json())
 		// 	.then(ids => {
@@ -56,26 +56,37 @@ const MainPage = () => {
 			}
 	
 			const fetchItem = async(id) => {
-				
-				// setinputValue("");
+				//console.log(id);
+				setinputValue(id);
 				const result = await fetch(`${ API_URL }item/${id}.json?print=pretty`)
 					.then(res => res.json())
-					.then(res => console.log(res))
-					//.then(response => setinputValue(response))
-					setinputValue(result);
-					//console.log(id);
-					return result;
+					.then(res => {return res})
+					.then(res => {setinputValue(res)});
+					//.then(res => {console.log(res)})
+					//.then(response => setinputValue(response));
+					console.log(result)
+					//selectNews.push(result);
 			}	
-		})
+			//setinputValue(fetchItem);
+			// selectNews.push(fetchItem);
+
+			// setinputValue(fetchItem)
+			// 			console.log(fetchItem());
+		}, [])
 
 
 	return (
 		<>
 		<ul>
 			{/* {inputValue.map((ne) => (
-				<li>{ne}</li>
+				<li>{ne.by}</li>
 			))} */}
-			{<li>{inputValue.by}</li>}
+			{<li>
+				<div>-{inputValue.by}</div>
+				<div>-{inputValue.descendants}</div>
+				<div>-{inputValue.kids}</div>
+				<div>-{inputValue.score}</div>
+			</li>}
 		</ul>
 		</>
 	)
