@@ -28,14 +28,46 @@ const MainPage = () => {
 		}
 	}, [])
 
+
 	return (
 		<>
+		<div>
+			<FilterDate item={inputValue}></FilterDate>
+			<FilterRating item={inputValue}></FilterRating>
+		</div>
 		<ol>
 			{inputValue.map((result) => (
 				<li key={result.id}>{result.title + " " + result.score + " " +  result.by + " " +  result.time}</li>
 			))}
 		</ol>
 		</>
+	)
+}
+
+const Button = ({onClickButton, children}) => {
+	return(
+		<button onClick={() => onClickButton()}>{children}</button>
+	)
+}
+
+const FilterDate = ({item}) => {
+	const handleClickFilterDate = () => {
+		const filteredArray = item.sort((a, b) => (b.time - a.time));
+		//setinputValue(filteredArray);
+	}
+
+	return(
+		<Button onClickButton={() => handleClickFilterDate()}>Сортировка по дате</Button>
+	)
+}
+
+const FilterRating = ({item}) => {
+	const handleClickFilterRating = () => {
+		console.log(`Сортировка по рейтингу${item}`);
+	}
+
+	return(
+		<Button onClickButton={() => handleClickFilterRating()}>Сортировка по рейтингу</Button>
 	)
 }
 
