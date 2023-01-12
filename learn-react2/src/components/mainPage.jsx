@@ -4,6 +4,7 @@ const MainPage = () => {
 	const API_URL = 'https://hacker-news.firebaseio.com/v0/';
 
 	const [inputValue, setinputValue] = useState([]);
+	const [arrNews, setArrNews] = useState([]);
 
 	useEffect(() => {
 		fetch(`${ API_URL }topstories.json`)
@@ -28,20 +29,15 @@ const MainPage = () => {
 		}
 	}, [])
 
-	const updateData = () => {
-		const filteredArray = inputValue.sort((a, b) => (b.time - a.time));
-		setinputValue(filteredArray);
-		console.log(filteredArray);
-
-		// console.log(val);
-		// setinputValue(val);
+	const updateData = (val) => {
+		setinputValue(val);
+		setArrNews(val);
 	}
 
 	return (
 		<>
 		<div>
-			<JustButton onClick={() => updateData()} item={inputValue}></JustButton>
-			<FilterDate item={inputValue}></FilterDate>
+			<FilterDate onClickFilterDate={(val) => updateData(val)} item={inputValue}></FilterDate>
 			<FilterRating item={inputValue}></FilterRating>
 		</div>
 		<ol>
@@ -53,46 +49,19 @@ const MainPage = () => {
 	)
 }
 
-const JustButton = ({item, onClick}) => {
-
-	const [sortArr, setSortArr] = useState([])
-
-	const onJustClickButton = () => {
-		const filteredArray = item.sort((a, b) => (b.time - a.time));
-		setSortArr(filteredArray);
-		//console.log(filteredArray);
-		//setinputValue(filteredArray);(
-			onClick(filteredArray);
-		
-	}
-
-	return(
-		<button onClick={() => onJustClickButton()}>Просто кнопка</button>
-	)
-}
-
 const Button = ({onClickButton, children}) => {
 	return(
 		<button onClick={() => onClickButton()}>{children}</button>
 	)
 }
 
-const FilterDate = ({item, onClickButton}) => {
+const FilterDate = ({item, onClickFilterDate}) => {
 	const [sortArr, setSortArr] = useState([])
 
 	const handleClickFilterDate = () => {
 		const filteredArray = item.sort((a, b) => (b.time - a.time));
-		setSortArr(filteredArray);
-		console.log(filteredArray);
-		//setinputValue(filteredArray);(
-		onClickButton(filteredArray);
-		
+		onClickFilterDate(filteredArray);
 	}
-
-	// const handleSortDate = (sortArr) => {
-	// 	console.log(sortArr);
-	// 	onChange(sortArr);
-	// }
 
 	return(
 		<Button onClickButton={() => handleClickFilterDate()}>Сортировка по дате</Button>
