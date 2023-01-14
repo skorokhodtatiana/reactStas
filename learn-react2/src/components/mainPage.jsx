@@ -27,9 +27,14 @@ const MainPage = () => {
 			return await fetch(`${ API_URL }item/${id}.json?print=pretty`)
 				.then(res => res.json())
 		}
-	}, [])
+	}, [inputValue])
 
 	const updateData = (val) => {
+		setinputValue(val);
+		setArrNews(val);
+	}
+
+	const updateRating = (val) => {
 		setinputValue(val);
 		setArrNews(val);
 	}
@@ -38,11 +43,11 @@ const MainPage = () => {
 		<>
 		<div>
 			<FilterDate onClickFilterDate={(val) => updateData(val)} item={inputValue}></FilterDate>
-			<FilterRating item={inputValue}></FilterRating>
+			<FilterRating onClickFilterRating={(val) => updateRating(val)} item={inputValue}></FilterRating>
 		</div>
 		<ol>
 			{inputValue.map((result) => (
-				<li key={result.id}>{result.title + " " + result.score + " " +  result.by + " " +  result.time}</li>
+				<li key={result.id}>{result.title + "  " + result.score + "  " +  result.by + "  " +result.time}</li>
 			))}
 		</ol>
 		</>
@@ -56,8 +61,6 @@ const Button = ({onClickButton, children}) => {
 }
 
 const FilterDate = ({item, onClickFilterDate}) => {
-	const [sortArr, setSortArr] = useState([])
-
 	const handleClickFilterDate = () => {
 		const filteredArray = item.sort((a, b) => (b.time - a.time));
 		onClickFilterDate(filteredArray);
@@ -68,9 +71,10 @@ const FilterDate = ({item, onClickFilterDate}) => {
 	)
 }
 
-const FilterRating = ({item}) => {
+const FilterRating = ({item, onClickFilterRating}) => {
 	const handleClickFilterRating = () => {
-		console.log(`Сортировка по рейтингу${item}`);
+		const sortArrRating = item.sort((a, b) => (b.score - a.score))
+		onClickFilterRating(sortArrRating);
 	}
 
 	return(
