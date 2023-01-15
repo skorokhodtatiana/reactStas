@@ -27,7 +27,7 @@ const MainPage = () => {
 			return await fetch(`${ API_URL }item/${id}.json?print=pretty`)
 				.then(res => res.json())
 		}
-	}, [inputValue])
+	}, [])
 
 	const updateData = (val) => {
 		setinputValue(val);
