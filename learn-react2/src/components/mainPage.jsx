@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import './mainPage.css';
+
 const { useEffect, useState } = require("react");
 
 const MainPage = () => {
@@ -49,7 +51,7 @@ const MainPage = () => {
 		</div>
 		<ol>
 			{inputValue.map((result) => (
-				<li key={result.id}><Link to="pageNews">{result.title + "  " + result.score + "  " +  result.by + "  " +result.time}</Link></li>
+				<li key={result.id}><Link className="item-list" to="pageNews">{result.title + "  " + result.score + "  " +  result.by + "  " +result.time}</Link></li>
 			))}
 		</ol>
 		</>
