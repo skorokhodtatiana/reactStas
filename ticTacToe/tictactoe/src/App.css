@@ -5,9 +5,15 @@ body {
 .square {
 	width: 40px;
 	height: 40px;
+	font-size: 16px;
 	font-weight: 600;
 }
 
 .board-row {
 	height: 40px;
+}
+
+.statusGame {
+	margin: 12px;
+	font-size: 18px;
 }
